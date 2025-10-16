@@ -39,8 +39,14 @@
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "moment-range": "^4.0.2",
+    "msw": "^2.11.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.9.4"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
