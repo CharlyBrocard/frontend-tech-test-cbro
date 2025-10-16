@@ -4,7 +4,8 @@ export interface Character {
   species: string;
   birthYear: string;
   description: string;
-  imageUrl: string;
+  imageUrl?: string;
+  affiliations: string[];
 }
 
 export interface Reaction {

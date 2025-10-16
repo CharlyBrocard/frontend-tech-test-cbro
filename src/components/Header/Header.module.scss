@@ -7,11 +7,8 @@ $text-color: white;
   border-bottom: 1px solid #ddd;
   min-height: 50px; // Ensure a standard height
 
-  .logo {
-    // Styling for the main text/logo area
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
+  .logo img {
+    height: 100px;
   }
 }
 
