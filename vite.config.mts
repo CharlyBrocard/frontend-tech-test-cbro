@@ -1,9 +1,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import type { UserConfig as VitestUserConfig } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.ts'],
+    css: false,
+  } as VitestUserConfig['test'],
   // 💡 Add the css configuration block here
   css: {
     preprocessorOptions: {
