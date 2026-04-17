@@ -6,9 +6,20 @@ $text-color: white;
   background-color: #f8f8f8; // Light gray background
   border-bottom: 1px solid #ddd;
   min-height: 50px; // Ensure a standard height
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  @media (max-width: 600px) {
+    padding: 0 12px;
+  }
 
   .logo img {
     height: 100px;
+  }
+
+  .searchForm {
+    width: 300px;
   }
 }
 
