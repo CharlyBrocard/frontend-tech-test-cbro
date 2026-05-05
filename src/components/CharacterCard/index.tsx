@@ -8,16 +8,34 @@ interface CharacterCardProps {
   reactions: Reaction[];
 }
 
-export const CharacterCard: React.FC<CharacterCardProps> = ({ character, reactions }) => {
-  const { name, species, birthYear, description, imageUrl, affiliations } = character;
+export const CharacterCard: React.FC<CharacterCardProps> = ({
+  character,
+  reactions,
+}) => {
+  const { name, species, birthYear, description, imageUrl, affiliations } =
+    character;
 
-  const uniqueReactions = [...new Map(reactions.map((r) => [r.content, r])).values()];
+  const reactionCounts: { emoji: string; count: number }[] = [];
+
+  reactions.forEach((r) => {
+    const existing = reactionCounts.find((rc) => rc.emoji === r.content);
+    if (existing) {
+      existing.count++;
+    } else {
+      reactionCounts.push({ emoji: r.content, count: 1 });
+    }
+  });
 
   return (
     <article className={styles.card}>
       <div className={styles.imageWrapper}>
         {imageUrl ? (
-          <img src={imageUrl} alt={name} className={styles.image} loading="lazy" />
+          <img
+            src={imageUrl}
+            alt={name}
+            className={styles.image}
+            loading="lazy"
+          />
         ) : (
           <div className={styles.imagePlaceholder} />
         )}
@@ -27,7 +45,9 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({ character, reactio
         <div className={styles.titleRow}>
           <h2 className={styles.name}>{name}</h2>
           <div className={styles.badges}>
-            {species && <span className={styles.badge}>{species.toUpperCase()}</span>}
+            {species && (
+              <span className={styles.badge}>{species.toUpperCase()}</span>
+            )}
             {birthYear && <span className={styles.badge}>{birthYear}</span>}
           </div>
         </div>
@@ -43,16 +63,13 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({ character, reactio
             ))}
           </div>
         )}
-
-        {uniqueReactions.length > 0 && (
-          <div className={styles.reactions}>
-            {uniqueReactions.map((reaction) => (
-              <span key={reaction.content} className={styles.reaction}>
-                {reaction.content}
-              </span>
-            ))}
-          </div>
-        )}
+        <div className={styles.emojiBox}>
+          {reactionCounts.map(({ emoji, count }) => (
+            <span className={styles.emoji} key={emoji}>
+              {emoji} {count}
+            </span>
+          ))}
+        </div>
       </div>
     </article>
   );
